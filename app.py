@@ -10,6 +10,10 @@ from langchain.document_loaders import PyPDFLoader
 import gradio as gr
 from langchain.llms import VLLM
 
+# Check if GPU is available and set the device accordingly
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"Using device: {device}")
+
 model_name = "lmsys/vicuna-7b-v1.3"
 
 llm = VLLM(
@@ -35,7 +39,7 @@ Helpful answer:
 """
 
 model_name = "BAAI/bge-large-en"
-model_kwargs = {'device': 'cpu'}
+model_kwargs = {'device': device}
 encode_kwargs = {'normalize_embeddings': False}
 embeddings = HuggingFaceBgeEmbeddings(
     model_name=model_name,
@@ -48,28 +52,47 @@ prompt = PromptTemplate(template = prompt_template, input_variables = ['context'
 load_vector_store = Chroma(persist_directory="stores/pet_cosine", embedding_function=embeddings)
 retriever = load_vector_store.as_retriever(search_kwargs={"k":1})
 
-#Check whether retriever working fine i.e for query it should find relevent chunk from document.
-query = "what is the fastest speed for a greyhound dog?"
-semantic_search = retriever.get_relevant_documents(query)
-print(semantic_search)
+
+sample_prompts = ["what is the fastest speed for a greyhound dog?", 
+                  "Why should we not feed chocolates to the dogs?", 
+                  "Name two factors which might contribute to why some dogs might get scared?"]
+
+def get_response(input):
+  query = input
+  chain_type_kwargs = {"prompt": prompt}
+  qa = RetrievalQA.from_chain_type(
+      llm=llm, 
+      chain_type="stuff", 
+      retriever=retriever, 
+      return_source_documents=True, 
+      chain_type_kwargs=chain_type_kwargs, 
+      verbose=True)
+  response = qa(query)
+  return response
+
+input = gr.Text(
+                label="Prompt",
+                show_label=False,
+                max_lines=1,
+                placeholder="Enter your prompt",
+                container=False,
+            )
+
+iface = gr.Interface(
+             fn=get_response, 
+             inputs=input, 
+             outputs="text",
+             title="My Dog PetCare Bot",
+             description="This is a RAG implementation based on Zephyr 7B Beta LLM.",
+             examples=sample_prompts,
+             
+             )
+
+iface.launch(share=True)
 
 
-print('#'*100)
 
 
-chain_type_kwargs = {"prompt" : prompt}
-
-qa = RetrievalQA.from_chain_type(
-          llm = llm, 
-          chain_type = "stuff", 
-          retriever = retriever, 
-          return_source_documents = True, 
-          chain_type_kwargs = chain_type_kwargs, 
-          verbose = True
-          )
-
-response = qa(query)
-print(response)
 
 
 
