@@ -29,8 +29,6 @@ The key challenges for generative AI in this regard are latency and throughput. 
 The **RAG_vLLM PetCare Bot** is a powerful tool designed to provide pet information by answering user queries using state-of-the-art language models and vector stores. This README will guide you through the setup and usage of the RAG_vLLM PetCare Bot.
 
 ## Table of Contents
-- [Introduction](#introduction)
-- [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
