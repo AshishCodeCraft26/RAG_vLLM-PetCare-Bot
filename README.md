@@ -35,7 +35,6 @@ The **RAG_vLLM PetCare Bot** is a powerful tool designed to provide pet informat
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
@@ -56,9 +55,45 @@ Before you can start using the RAG_vLLM PetCare Bot, make sure you have the foll
 1. Clone this repository to your local machine.
 
     ```bash
-    git clone https://github.com/your-username/langchain-medical-bot.git
-    cd langchain-medical-bot
+    git clone https://github.com/NeuroNest26/RAG_vLLM-PetCare-Bot.git
+    cd RAG_vLLM-PetCare-Bot
     ```
+2. Create a Python virtual environment (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate # On Windows, use: venv\Scripts\activate
+   ```
+3. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   
+4. Download the required language models and data. Please refer to the Langchain documentation for specific instructions on how to download and set up the language model and vector store.
+
+5. Set up the necessary paths and configurations in your project.
+
+## Getting Started
+To get started with the RAG_vLLM PetCare Bot, you need to:
+1. Set up your environment and install the required packages as described in the [Installation](#installation) section.
+2. Prepare the language model and data as per the Langchain documentation.
+3. Start the bot by running the provided Python script or integrating it into your application.
+
+## Usage
+The RAG_vLLM PetCare Bot can be used for answering pet-related queries. To use the bot:
+1. Start the bot by running your application or using the provided Python script.
+2. Send a pet-related query to the bot.
+3. The bot will provide a response based on the information available in its database.
+4. If sources are found, they will be provided alongside the answer.
+5. The bot can be customized to return specific information based on the query and context provided.
+
+
+## License
+This project is licensed under the MIT License.
+
+For more information on how to use, configure, and extend the RAG_vLLM PetCare Bot, please refer to the Langchain documentation or contact the project maintainers.
+
+Happy coding with RAG_vLLM PetCare Bot! 🚀
+
 
   
 
