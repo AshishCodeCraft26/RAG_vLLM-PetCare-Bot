@@ -1,0 +1,12 @@
+chainlit 
+ctransformers
+torch
+sentence_transformers
+chromadb 
+langchain
+pypdf 
+PyPDF2
+gradio
+vllm==0.2.1
+fschat
+langchain
