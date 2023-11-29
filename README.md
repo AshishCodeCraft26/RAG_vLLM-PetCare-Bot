@@ -35,8 +35,6 @@ The **RAG_vLLM PetCare Bot** is a powerful tool designed to provide pet informat
 - [Usage](#usage)
 - [License](#license)
 
-## Introduction
-[Short introduction about the RAG_vLLM PetCare Bot]
 
 ## Prerequisites
 Before you can start using the RAG_vLLM PetCare Bot, make sure you have the following prerequisites installed on your system:
